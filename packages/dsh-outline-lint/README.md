@@ -36,6 +36,8 @@ npx outline-lint report.md --warnings-fail
 
 交付文档结构检查：缺标题、多个一级标题、标题跳级、开头没有结论、没有任何可复现命令。
 
+**范围**：结论规则（no-conclusion）针对**报告类交付物**——研究报告、评审报告这类有「交代结论」义务的文档。参考文档（README、手册、 CHANGELOG）没有结论义务，对这些文件出现的 no-conclusion 是域外提示，不是缺陷。
+
 Exit codes: `0` clean, `1` findings, `2` usage or read error. In DSH the same function is behind `POST /outline-lint/api` with `{"text":"…"}` or `{"path":"…"}`, so the panel and CI agree by construction.
 
 Part of [dsh-verify-kit](https://github.com/zjukop3/dsh-verify-kit): five small deterministic checks, each one verb, each runnable without DSH.
