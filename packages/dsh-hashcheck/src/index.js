@@ -5,6 +5,10 @@
 import { createHash } from 'node:crypto'
 import { readdir, readFile, stat } from 'node:fs/promises'
 import { join, relative, sep } from 'node:path'
+import { createRequire } from 'node:module'
+
+const require = createRequire(import.meta.url)
+export const packageVersion = require('../package.json').version
 
 export const name = 'hashcheck'
 export const inject = ['webServer']
@@ -55,6 +59,7 @@ export async function buildManifest(directory, options = {}) {
     // what was excluded would report every excluded file as unlisted.
     ignore: [...(options.ignore || [])].sort(),
     files: entries,
+    packageVersion,
   }
 }
 
@@ -107,7 +112,7 @@ export async function verifyManifest(manifest, directory, { reportExtra = true, 
     }
   }
   const errors = findings.filter(finding => finding.level === 'error').length
-  return { ok: errors === 0, checked: listed.length, errors, warnings: findings.length - errors, findings }
+  return { ok: errors === 0, checked: listed.length, errors, warnings: findings.length - errors, findings, packageVersion }
 }
 
 // The host route is a thin wrapper: the CLI and the route call the same
@@ -139,4 +144,5 @@ export function apply(ctx, config = {}) {
     }
   }
   ctx.effect(() => ctx.webServer.register({ kind: 'prefix', path: prefix, handler }))
+  ctx.effect(() => ctx.logger.info(`hashcheck ${packageVersion} loaded`))
 }

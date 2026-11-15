@@ -1,6 +1,6 @@
 {
   "name": "dsh-hashcheck",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "SHA-256 manifests for delivered files: build once, verify anywhere, and say exactly which bytes moved instead of 'looks fine'.",
   "type": "module",
   "main": "./src/index.js",
@@ -26,7 +26,16 @@
     "README.md",
     "LICENSE"
   ],
-  "keywords": ["dsh", "dsh-plugin", "deepseek-harness", "sha256", "hash-manifest", "delivery-verification", "交付校验", "文件哈希"],
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "sha256",
+    "hash-manifest",
+    "delivery-verification",
+    "交付校验",
+    "文件哈希"
+  ],
   "license": "MIT",
   "author": "zjukop3",
   "repository": {

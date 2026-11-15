@@ -24,6 +24,7 @@ test('a manifest is stable across builds and ignores what it is told to', async 
   assert.deepEqual(Object.keys(first.files).sort(), ['nested/data.csv', 'report.md'])
   assert.equal(first.files['report.md'].sha256, digestOf(Buffer.from('# report\n')))
   assert.equal(first.algorithm, 'sha256')
+  assert.equal(first.packageVersion, '0.1.1', 'the result carries the package version so a running route can be told apart from an old module')
 })
 
 test('verification finds a changed file, a missing file and an unlisted one separately', async t => {
