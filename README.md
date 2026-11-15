@@ -22,3 +22,14 @@ Design rules these follow, and the reason they are separate packages rather than
 - **The route and the CLI call the same function**, so the panel and CI cannot disagree.
 
 MIT.
+
+
+## 在 DSH 中安装（索引源）
+
+全部八件作品都在一个 format 1 索引源里，从 npm registry 解析，装完即用：
+
+1. 打开「插件」，启用实验性「自定义插件索引」。
+2. 「发现 → 添加索引源」，添加：`https://zjukop3.github.io/dsh-review-outbox/plugins.json`
+3. 按名字搜索安装（本仓库的五个：`hashcheck` / `citelint` / `outline-lint` / `tablelint` / `numberlint`；行业三件在 [dsh-vertical-kit](https://github.com/zjukop3/dsh-vertical-kit)：`agreement-check` / `invoice-check` / `listing-check`）。
+
+不装 DSH 也可以：`npx <名字> --help` 直接用，或按下面的 CLI 说明。

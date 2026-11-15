@@ -1,6 +1,6 @@
 {
   "name": "dsh-numberlint",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Number consistency check for one document: the same quantity written 4,985 and 4985, the same percentage with and without a space, and ranges with mixed dashes.",
   "type": "module",
   "main": "./src/index.js",
@@ -17,7 +17,8 @@
     }
   },
   "engines": {
-    "node": ">=22.19.0"
+    "node": ">=22.19.0",
+    "dsh": ">=0.2.2-rc.1 <0.3.0-0"
   },
   "files": [
     "src",
