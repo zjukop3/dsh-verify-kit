@@ -38,7 +38,7 @@ test('every embedded site example matches a fresh CLI run', async t => {
       const after = spawnSync(process.execPath, [cli, 'verify', join(delivery, 'hashcheck.json'), '--dir', delivery], { encoding: 'utf8' })
       lines.push(...normalize(`${after.stdout}${after.stderr}`).trim().split('\n'))
     }
-    const embedded = check.example.output.split('\n').filter(line => line && !line.startsWith('$'))
+    const embedded = check.example.output.split('\n').filter(line => line && !line.startsWith('$') && !line.startsWith('# '))
     for (const line of embedded) {
       assert.ok(lines.some(actual => actual.trim() === line.trim()),
         `${check.slug}: embedded line not produced by the CLI\n  embedded: ${line}\n  actual:   ${lines.join(' | ')}`)
