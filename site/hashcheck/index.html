@@ -3,7 +3,7 @@
 <p class="eyebrow">DSH VERIFY KIT · dsh-hashcheck</p>
 <h1>交付文件校验清单（SHA-256 manifest）</h1>
 <p><strong>它决定一件事：</strong>交付出去的 bytes 和你验收过的 bytes 是否还是同一份。</p>
-<nav class="nav"><a href="../hashcheck/">hashcheck</a><a href="../citelint/">citelint</a><a href="../outline-lint/">outline-lint</a><a href="../tablelint/">tablelint</a><a href="../numberlint/">numberlint</a><a href="https://github.com/zjukop3/dsh-verify-kit">GitHub 源码</a><a href="https://www.npmjs.com/package/dsh-hashcheck">npm</a></nav>
+<nav class="nav"><a href="../hashcheck/">hashcheck</a><a href="../citelint/">citelint</a><a href="../outline-lint/">outline-lint</a><a href="../tablelint/">tablelint</a><a href="../numberlint/">numberlint</a><a href="https://zjukop3.github.io/dsh-review-outbox/ecosystem/">生态月报</a><a href="https://github.com/zjukop3/dsh-verify-kit">GitHub 源码</a><a href="https://www.npmjs.com/package/dsh-hashcheck">npm</a></nav>
 <h2>检查规则</h2>
 <table><tr><th>规则</th><th>判定</th></tr><tr><td><code>changed</code></td><td>清单里有、磁盘上也有，但哈希对不上 → error，报前后摘要</td></tr><tr><td><code>missing</code></td><td>清单里有、磁盘上没有 → error</td></tr><tr><td><code>unlisted</code></td><td>磁盘上有、清单里没有 → warn（交付后混进来的文件）</td></tr><tr><td><code>size-mismatch</code></td><td>哈希相同但记录的字节数不符 → warn（顺手核对，极少出现）</td></tr></table>
 <h2>用法</h2>

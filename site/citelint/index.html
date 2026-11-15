@@ -3,7 +3,7 @@
 <p class="eyebrow">DSH VERIFY KIT · dsh-citelint</p>
 <h1>报告引用检查清单</h1>
 <p><strong>它决定一件事：</strong>引用编号、来源与本地链接是否自洽。</p>
-<nav class="nav"><a href="../hashcheck/">hashcheck</a><a href="../citelint/">citelint</a><a href="../outline-lint/">outline-lint</a><a href="../tablelint/">tablelint</a><a href="../numberlint/">numberlint</a><a href="https://github.com/zjukop3/dsh-verify-kit">GitHub 源码</a><a href="https://www.npmjs.com/package/dsh-citelint">npm</a></nav>
+<nav class="nav"><a href="../hashcheck/">hashcheck</a><a href="../citelint/">citelint</a><a href="../outline-lint/">outline-lint</a><a href="../tablelint/">tablelint</a><a href="../numberlint/">numberlint</a><a href="https://zjukop3.github.io/dsh-review-outbox/ecosystem/">生态月报</a><a href="https://github.com/zjukop3/dsh-verify-kit">GitHub 源码</a><a href="https://www.npmjs.com/package/dsh-citelint">npm</a></nav>
 <h2>检查规则</h2>
 <table><tr><th>规则</th><th>判定</th></tr><tr><td><code>numbering-gap</code></td><td>编号出现 1, 2, 4 → warn，指出期望 1..N（删段落后的典型残留）</td></tr><tr><td><code>duplicate-number</code></td><td>同一个编号定义了两次 → error</td></tr><tr><td><code>duplicate-url</code></td><td>两个编号指向同一来源 → warn</td></tr><tr><td><code>unreferenced</code></td><td>来源列在文末但正文从未引用 → warn</td></tr><tr><td><code>undefined</code></td><td>正文引用了 [3] 但文末没有 [3] → error</td></tr><tr><td><code>local-missing</code></td><td>引用指向 ./nope.csv 但交付目录里没有这个文件 → error</td></tr></table>
 <h2>用法</h2>
