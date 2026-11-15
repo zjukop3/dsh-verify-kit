@@ -57,6 +57,7 @@ function home() {
 <h2>为什么是五个独立的包</h2>
 <p>一份交付通常只需要其中一两个。装五个用一个，和装一个用五个，是两种不同的依赖负担。每个包：主函数 + CLI + host 路由，出口码 <code>0/1/2</code>，<code>--json</code> 出机器结果。规则与测试一一对应，页面上的规则表来自测试套件，不会漂移。</p>
 <p>垂直行业的检查（合同、发票、电商）在 <a href="${VERTICAL}">dsh-vertical-kit</a>。</p>
+<section class="install"><h2>在 DSH 中安装</h2><p>八件作品都在同一个 format 1 索引源里，从 npm registry 解析，装完即用。在「插件」启用「自定义插件索引」，添加 <code>https://zjukop3.github.io/dsh-review-outbox/plugins.json</code>，按名字搜索安装（本仓库五个：hashcheck / citelint / outline-lint / tablelint / numberlint）。</p><p><a href="https://zjukop3.github.io/dsh-review-outbox/">索引源与全部收录说明</a></p></section>
 <small><a href="${REPO}">github.com/zjukop3/dsh-verify-kit</a> · MIT · 28 tests</small>
 </main></body></html>`
 }
