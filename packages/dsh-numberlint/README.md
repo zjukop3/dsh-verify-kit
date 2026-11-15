@@ -2,6 +2,27 @@
 
 Comparing forms rather than values is the point: 4,985 and 4985 are the same number spelled two ways, and a reader who sees both stops trusting either.
 
+<!-- example:start -->
+## 真实输入输出
+
+输入：
+
+```markdown
+目录 4,985 个条目，我们实测了 4985 个。命中率 58.6%，另一处写 58.6 %。
+```
+
+真实运行（逐字输出，由测试与工具保持同步）：
+
+```text
+$ numberlint report-numbers.md
+warn thousands-inconsistent 4985 is written "4,985" and "4985" in the same document
+warn percent-spacing 58.6% is written "58.6%" and "58.6 %"
+ok: 0 errors, 2 warnings
+```
+
+出口码：0（警告不失败；--warnings-fail 时为 1）。
+<!-- example:start -->
+
 ```bash
 npx numberlint report.md            # human output, exit 1 on findings
 npx numberlint report.md --json     # machine output for a pipeline

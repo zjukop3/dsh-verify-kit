@@ -2,6 +2,32 @@
 
 Length is not the failure mode; shape is. This reports the five defects that make a document unreviewable regardless of how good the reasoning is.
 
+<!-- example:start -->
+## 真实输入输出
+
+输入：
+
+```markdown
+# 数据管线报告
+
+#### 处理流程
+
+原始数据经清洗后入库。
+```
+
+真实运行（逐字输出，由测试与工具保持同步）：
+
+```text
+$ outline-lint report-outline.md
+warn heading-jump line 3: "处理流程" is h4 directly under h1, which reads as a lost level
+error no-conclusion no conclusion before the body: add a heading matching 结论/摘要 or open the first paragraph with 结论：
+error no-reproduction nothing a reader can run: add a 复现 section or a fenced command
+fail: 2 errors, 1 warnings
+```
+
+出口码：1。
+<!-- example:start -->
+
 ```bash
 npx outline-lint report.md            # human output, exit 1 on findings
 npx outline-lint report.md --json     # machine output for a pipeline

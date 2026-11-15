@@ -2,6 +2,29 @@
 
 A ragged table renders correctly in the editor that produced it and broken everywhere it is published. Cell counts are cheap to compare and expensive to notice by eye.
 
+<!-- example:start -->
+## 真实输入输出
+
+输入：
+
+```markdown
+| 项目 | 数量 |
+| --- | --- |
+| 一 | 2 |
+| 三 | 4 | 6 |
+```
+
+真实运行（逐字输出，由测试与工具保持同步）：
+
+```text
+$ tablelint report-table.md
+error column-count line 4: 3 cells in a 2-column table
+fail: 1 errors, 0 warnings
+```
+
+出口码：1。
+<!-- example:start -->
+
 ```bash
 npx tablelint report.md            # human output, exit 1 on findings
 npx tablelint report.md --json     # machine output for a pipeline
