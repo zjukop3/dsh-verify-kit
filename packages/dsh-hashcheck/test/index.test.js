@@ -3,7 +3,6 @@ import assert from 'node:assert/strict'
 import { mkdtemp, mkdir, writeFile, readFile, rm } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import { readFile } from 'node:fs/promises'
 import { buildManifest, digestOf, listFiles, serializeManifest, verifyManifest } from '../src/index.js'
 const { version: packageVersion } = JSON.parse(await readFile(new URL('../package.json', import.meta.url), 'utf8'))
 
