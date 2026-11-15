@@ -6,7 +6,7 @@ Five small deterministic checks for deliverables that an agent produced and a pe
 | --- | --- |
 | [dsh-hashcheck](packages/dsh-hashcheck) | which bytes moved since the manifest was written |
 | [dsh-citelint](packages/dsh-citelint) | whether the citation numbers, sources and local links hold together |
-| [dsh-outline-lint](packages/dsh-outline-lint) | whether the document has a title, a conclusion up front, and something to run |
+| [dsh-outline-lint](packages/dsh-outline-lint) | whether the document has a title, a conclusion up front, and something to run (the conclusion rule targets report-like deliverables; reference docs are out of domain) |
 | [dsh-tablelint](packages/dsh-tablelint) | whether every table row has the column count its header claims |
 | [dsh-numberlint](packages/dsh-numberlint) | whether one quantity is spelled two ways in one document |
 
