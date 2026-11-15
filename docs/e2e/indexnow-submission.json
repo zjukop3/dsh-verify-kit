@@ -1,0 +1,47 @@
+{
+  "ok": true,
+  "submittedAt": "2026-11-15T06:49:38.819Z",
+  "endpoint": "https://www.bing.com/indexnow",
+  "keyLocation": "https://zjukop3.github.io/dsh-verify-kit/5d8832d771acd258574497dd011fa99d.txt",
+  "urlList": [
+    "https://zjukop3.github.io/dsh-verify-kit/",
+    "https://zjukop3.github.io/dsh-verify-kit/hashcheck/",
+    "https://zjukop3.github.io/dsh-verify-kit/citelint/",
+    "https://zjukop3.github.io/dsh-verify-kit/outline-lint/",
+    "https://zjukop3.github.io/dsh-verify-kit/tablelint/",
+    "https://zjukop3.github.io/dsh-verify-kit/numberlint/"
+  ],
+  "preflight": {
+    "keyFileVerified": true,
+    "urls": [
+      {
+        "url": "https://zjukop3.github.io/dsh-verify-kit/",
+        "status": 200
+      },
+      {
+        "url": "https://zjukop3.github.io/dsh-verify-kit/hashcheck/",
+        "status": 200
+      },
+      {
+        "url": "https://zjukop3.github.io/dsh-verify-kit/citelint/",
+        "status": 200
+      },
+      {
+        "url": "https://zjukop3.github.io/dsh-verify-kit/outline-lint/",
+        "status": 200
+      },
+      {
+        "url": "https://zjukop3.github.io/dsh-verify-kit/tablelint/",
+        "status": 200
+      },
+      {
+        "url": "https://zjukop3.github.io/dsh-verify-kit/numberlint/",
+        "status": 200
+      }
+    ]
+  },
+  "responseStatus": 200,
+  "responseBody": null,
+  "indexingStatus": "unknown",
+  "externalActivationClaim": false
+}
