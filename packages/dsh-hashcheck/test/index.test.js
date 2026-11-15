@@ -3,7 +3,9 @@ import assert from 'node:assert/strict'
 import { mkdtemp, mkdir, writeFile, readFile, rm } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
+import { readFile } from 'node:fs/promises'
 import { buildManifest, digestOf, listFiles, serializeManifest, verifyManifest } from '../src/index.js'
+const { version: packageVersion } = JSON.parse(await readFile(new URL('../package.json', import.meta.url), 'utf8'))
 
 async function fixture() {
   const directory = await mkdtemp(join(tmpdir(), 'hashcheck-'))
@@ -24,7 +26,7 @@ test('a manifest is stable across builds and ignores what it is told to', async 
   assert.deepEqual(Object.keys(first.files).sort(), ['nested/data.csv', 'report.md'])
   assert.equal(first.files['report.md'].sha256, digestOf(Buffer.from('# report\n')))
   assert.equal(first.algorithm, 'sha256')
-  assert.equal(first.packageVersion, '0.1.1', 'the result carries the package version so a running route can be told apart from an old module')
+  assert.equal(first.packageVersion, packageVersion, 'the result carries the package version so a running route can be told apart from an old module')
 })
 
 test('verification finds a changed file, a missing file and an unlisted one separately', async t => {
