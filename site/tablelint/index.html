@@ -8,6 +8,15 @@
 <table><tr><th>规则</th><th>判定</th></tr><tr><td><code>column-count</code></td><td>某行单元格数与表头不符 → error，报行号</td></tr><tr><td><code>delimiter-count</code></td><td>分隔行数量与表头不符 → error</td></tr><tr><td><code>single-column</code></td><td>只有一列的「表格」→ warn（那是列表）</td></tr><tr><td><code>duplicate-header</code></td><td>两列同名 → warn</td></tr><tr><td><code>empty-header</code></td><td>某列没有表头 → warn</td></tr><tr><td><code>empty-table</code></td><td>只有表头没有数据行 → warn</td></tr></table>
 <h2>用法</h2>
 <pre><code>npx tablelint report.md --json</code></pre><pre><code>npx tablelint report.md --warnings-fail</code></pre>
+<h2>真实输入输出</h2>
+<details><summary>输入</summary><pre><code>| 项目 | 数量 |
+| --- | --- |
+| 一 | 2 |
+| 三 | 4 | 6 |</code></pre></details>
+<pre><code>$ tablelint report-table.md
+error column-count line 4: 3 cells in a 2-column table
+fail: 1 errors, 0 warnings</code></pre>
+<p>出口码：1。输出为真实 CLI 运行的逐字结果，由测试与工具保持同步。</p>
 <p>出口码：<code>0</code> 干净、<code>1</code> 有发现、<code>2</code> 用法或读文件错误。<code>--json</code> 输出机器可读结果，<code>--warnings-fail</code> 让警告也算失败。DSH 内同样的函数在 <code>POST /tablelint/api</code>（<code>{"text":"…"}</code> 或 <code>{"path":"…"}</code>），面板与 CI 调同一实现，不可能不一致。</p>
 <div class="limit"><strong>这是清单，不是专业人士。</strong>每条发现都是文件里可判定的结构缺陷，带行号或路径；它从不说「内容好不好」。</div>
 <small>支持转义竖线（\|），代码块里的表格不参与检查—— fenced code 内的示例不该被当成缺陷。 · <a href="https://github.com/zjukop3/dsh-verify-kit#readme">dsh-verify-kit 全部五个检查</a></small>

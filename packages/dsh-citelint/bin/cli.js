@@ -2,6 +2,7 @@
 // Exit codes: 0 clean, 1 findings, 2 usage or read error. The same function the
 // host route calls, so a check that passes here cannot fail in the panel.
 import { readFile } from 'node:fs/promises'
+import { dirname, resolve } from 'node:path'
 import { lintCitations } from '../src/index.js'
 
 const args = process.argv.slice(2)
@@ -12,7 +13,8 @@ if (!target) {
 }
 const asJson = args.includes('--json')
 try {
-  const result = await lintCitations(await readFile(target, 'utf8'))
+  const text = await readFile(target, 'utf8')
+  const result = await lintCitations(text, { baseDirectory: resolve(dirname(target)) })
   if (asJson) {
     process.stdout.write(`${JSON.stringify(result, null, 2)}\n`)
   } else {

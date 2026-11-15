@@ -8,6 +8,19 @@
 <table><tr><th>规则</th><th>判定</th></tr><tr><td><code>numbering-gap</code></td><td>编号出现 1, 2, 4 → warn，指出期望 1..N（删段落后的典型残留）</td></tr><tr><td><code>duplicate-number</code></td><td>同一个编号定义了两次 → error</td></tr><tr><td><code>duplicate-url</code></td><td>两个编号指向同一来源 → warn</td></tr><tr><td><code>unreferenced</code></td><td>来源列在文末但正文从未引用 → warn</td></tr><tr><td><code>undefined</code></td><td>正文引用了 [3] 但文末没有 [3] → error</td></tr><tr><td><code>local-missing</code></td><td>引用指向 ./nope.csv 但交付目录里没有这个文件 → error</td></tr></table>
 <h2>用法</h2>
 <pre><code>npx citelint report.md --json</code></pre><pre><code>npx citelint report.md --warnings-fail</code></pre>
+<h2>真实输入输出</h2>
+<details><summary>输入</summary><pre><code>## 结论
+
+见 [1] 与 [3]。
+
+[1]: https://example.com/a
+[2]: https://example.com/b
+[3]: ./missing-appendix.md</code></pre></details>
+<pre><code>$ citelint report-cite.md
+warn unreferenced [2] is defined and never cited in the text
+error local-missing [3] points at ./missing-appendix.md, which is not in the delivered directory
+fail: 1 errors, 1 warnings</code></pre>
+<p>出口码：1。输出为真实 CLI 运行的逐字结果，由测试与工具保持同步。</p>
 <p>出口码：<code>0</code> 干净、<code>1</code> 有发现、<code>2</code> 用法或读文件错误。<code>--json</code> 输出机器可读结果，<code>--warnings-fail</code> 让警告也算失败。DSH 内同样的函数在 <code>POST /citelint/api</code>（<code>{"text":"…"}</code> 或 <code>{"path":"…"}</code>），面板与 CI 调同一实现，不可能不一致。</p>
 <div class="limit"><strong>这是清单，不是专业人士。</strong>每条发现都是文件里可判定的结构缺陷，带行号或路径；它从不说「内容好不好」。</div>
 <small>http(s) 引用不查文件系统；本地相对路径才会对照交付目录。检查的是引用结构，不是引用内容对不对。 · <a href="https://github.com/zjukop3/dsh-verify-kit#readme">dsh-verify-kit 全部五个检查</a></small>

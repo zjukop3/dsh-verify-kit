@@ -8,6 +8,13 @@
 <table><tr><th>规则</th><th>判定</th></tr><tr><td><code>thousands-inconsistent</code></td><td>4,985 与 4985 同时出现 → warn，报两种拼写</td></tr><tr><td><code>percent-spacing</code></td><td>58.6% 与 58.6 % 同时出现 → warn</td></tr><tr><td><code>range-dash</code></td><td>区间连接号混用（11-02–08 与 11-02-08）→ warn</td></tr></table>
 <h2>用法</h2>
 <pre><code>npx numberlint report.md --json</code></pre><pre><code>npx numberlint report.md --warnings-fail</code></pre>
+<h2>真实输入输出</h2>
+<details><summary>输入</summary><pre><code>目录 4,985 个条目，我们实测了 4985 个。命中率 58.6%，另一处写 58.6 %。</code></pre></details>
+<pre><code>$ numberlint report-numbers.md
+warn thousands-inconsistent 4985 is written &quot;4,985&quot; and &quot;4985&quot; in the same document
+warn percent-spacing 58.6% is written &quot;58.6%&quot; and &quot;58.6 %&quot;
+ok: 0 errors, 2 warnings</code></pre>
+<p>出口码：0（警告不失败；--warnings-fail 时为 1）。输出为真实 CLI 运行的逐字结果，由测试与工具保持同步。</p>
 <p>出口码：<code>0</code> 干净、<code>1</code> 有发现、<code>2</code> 用法或读文件错误。<code>--json</code> 输出机器可读结果，<code>--warnings-fail</code> 让警告也算失败。DSH 内同样的函数在 <code>POST /numberlint/api</code>（<code>{"text":"…"}</code> 或 <code>{"path":"…"}</code>），面板与 CI 调同一实现，不可能不一致。</p>
 <div class="limit"><strong>这是清单，不是专业人士。</strong>每条发现都是文件里可判定的结构缺陷，带行号或路径；它从不说「内容好不好」。</div>
 <small>比较的是形态不是值：不同数量允许不同写法；带小数点的版本号不会被误判成千位分隔候选。 · <a href="https://github.com/zjukop3/dsh-verify-kit#readme">dsh-verify-kit 全部五个检查</a></small>

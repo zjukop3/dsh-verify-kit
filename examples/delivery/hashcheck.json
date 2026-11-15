@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "algorithm": "sha256",
+  "ignore": [],
+  "files": {
+    "nested.csv": {
+      "size": 8,
+      "sha256": "492d5ea496056f1a6a6592241032fab764c321596317930b4fa0e1e8bc3b7470"
+    },
+    "report.md": {
+      "size": 9,
+      "sha256": "d2f56516fd6c35644826ae6f1876a47870b7fa19acedac3e52fb6f2a94aa2624"
+    }
+  },
+  "packageVersion": "0.1.1"
+}

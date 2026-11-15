@@ -8,6 +8,18 @@
 <table><tr><th>规则</th><th>判定</th></tr><tr><td><code>no-title</code></td><td>没有一级标题 → error</td></tr><tr><td><code>multiple-h1</code></td><td>多个一级标题 → warn（只有文章标题该是一级）</td></tr><tr><td><code>heading-jump</code></td><td>h1 下面直接 h4 → warn，提示层级丢失</td></tr><tr><td><code>no-conclusion</code></td><td>没有「结论/摘要」标题、开头也没有「结论：」→ error</td></tr><tr><td><code>no-reproduction</code></td><td>没有复现章节、也没有任何可运行命令 → error</td></tr></table>
 <h2>用法</h2>
 <pre><code>npx outline-lint report.md --json</code></pre><pre><code>npx outline-lint report.md --warnings-fail</code></pre>
+<h2>真实输入输出</h2>
+<details><summary>输入</summary><pre><code># 数据管线报告
+
+#### 处理流程
+
+原始数据经清洗后入库。</code></pre></details>
+<pre><code>$ outline-lint report-outline.md
+warn heading-jump line 3: &quot;处理流程&quot; is h4 directly under h1, which reads as a lost level
+error no-conclusion no conclusion before the body: add a heading matching 结论/摘要 or open the first paragraph with 结论：
+error no-reproduction nothing a reader can run: add a 复现 section or a fenced command
+fail: 2 errors, 1 warnings</code></pre>
+<p>出口码：1。输出为真实 CLI 运行的逐字结果，由测试与工具保持同步。</p>
 <p>出口码：<code>0</code> 干净、<code>1</code> 有发现、<code>2</code> 用法或读文件错误。<code>--json</code> 输出机器可读结果，<code>--warnings-fail</code> 让警告也算失败。DSH 内同样的函数在 <code>POST /outline-lint/api</code>（<code>{"text":"…"}</code> 或 <code>{"path":"…"}</code>），面板与 CI 调同一实现，不可能不一致。</p>
 <div class="limit"><strong>这是清单，不是专业人士。</strong>每条发现都是文件里可判定的结构缺陷，带行号或路径；它从不说「内容好不好」。</div>
 <small>判定从文件来，不做任何模型调用：结论先行匹配 结论/摘要/summary/tl;dr，复现匹配章节名或 node/npm/python/git/docker 等命令行。 · <a href="https://github.com/zjukop3/dsh-verify-kit#readme">dsh-verify-kit 全部五个检查</a></small>
