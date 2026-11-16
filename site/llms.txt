@@ -1,0 +1,11 @@
+# dsh-verify-kit
+
+> Generic deliverable-defect checks for DeepSeek Harness: hashes, citations, structure, tables, numbers. Each is one verb, each runs without DSH, each returns the same JSON from the CLI and the host route.
+
+- https://zjukop3.github.io/dsh-verify-kit/hashcheck/: 交付文件校验清单（SHA-256 manifest） — 交付前生成 SHA-256 清单，验收时逐文件比对：哪个文件改了、哪个丢了、哪个没进清单。出口码 0/1/2 可接 CI。
+- https://zjukop3.github.io/dsh-verify-kit/citelint/: 报告引用检查清单 — 报告交付前的引用检查：编号断号、同一来源重复编号、列了没引用的来源、指向不存在本地文件的链接。Markdown 纯文本即可判定。
+- https://zjukop3.github.io/dsh-verify-kit/outline-lint/: 文档结构检查清单 — 报告交付前的结构检查：有没有标题、有没有结论先行、有没有能跑的复现命令、标题有没有跳级。长度不重要，结构才重要。范围：结论规则针对报告类交付物；参考文档（README、手册）没有结论义务，域外提示不是缺陷。
+- https://zjukop3.github.io/dsh-verify-kit/tablelint/: Markdown 表格检查清单 — 生成报告里最常见的缺陷：表格行列不齐。在生成它的编辑器里渲染正常，发布出去就碎。单元格数量是廉价的对比，肉眼发现却很贵。
+- https://zjukop3.github.io/dsh-verify-kit/numberlint/: 文档内数字写法一致性检查 — 同一份文档里「4,985」和「4985」各出现一次，读者就会两个都不信。这个检查比较写法而不是数值，报出同一数量的不同拼写。
+
+- https://github.com/zjukop3/dsh-verify-kit: Public source code, 5 packages, one implementation per check shared by the CLI and the host route.
