@@ -41,4 +41,14 @@ Exit codes: `0` clean, `1` findings, `2` usage or read error. In CI, gate on the
 
 Deterministic by construction: paths are sorted and normalized to forward slashes, no timestamps or mtimes enter the digest, so the same tree produces the same manifest on macOS, Linux and Windows.
 
+## What it decides
+
+一次交付的字节是否与清单一致：`build` 对文件树产出排序归一的 SHA-256 清单，`verify` 对着清单逐个校验，报告哪些文件动了、哪些是新增、哪些消失了。
+
+## Honest scope
+
+这是防篡改证据，不是验收意见：它证明**字节动没动**，不能证明改动是改进还是破坏。清单不含时间戳与 mtime，同一棵树在 macOS/Linux/Windows 产出同一份清单。
+
+Part of [dsh-verify-kit](https://github.com/zjukop3/dsh-verify-kit): generic deliverable defects, each one verb, each runnable without DSH.
+
 MIT.

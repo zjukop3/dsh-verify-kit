@@ -41,4 +41,14 @@ Exit codes: `0` clean, `1` findings, `2` usage or read error. In DSH the same fu
 
 Part of [dsh-verify-kit](https://github.com/zjukop3/dsh-verify-kit): five small deterministic checks, each one verb, each runnable without DSH.
 
+## What it decides
+
+引用的账目是否干净：编号断档、同一来源重复编号、列了却从未被引用的来源、失效的本地链接。每条发现带行号。
+
+## Honest scope
+
+这是引用的账目检查，不是来源核实：它证明**引用的账记得对**，不能证明被引的来源真的支持那句话——那要读原文。编号断档与孤儿来源是最常见的两种账目错误。
+
+Part of [dsh-verify-kit](https://github.com/zjukop3/dsh-verify-kit): generic deliverable defects, each one verb, each runnable without DSH.
+
 MIT.

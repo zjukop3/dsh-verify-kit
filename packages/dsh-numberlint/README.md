@@ -35,4 +35,14 @@ Exit codes: `0` clean, `1` findings, `2` usage or read error. In DSH the same fu
 
 Part of [dsh-verify-kit](https://github.com/zjukop3/dsh-verify-kit): five small deterministic checks, each one verb, each runnable without DSH.
 
+## What it decides
+
+同一数量在文档里是否只写一种形态：千分位有无、百分比空格、区间连接号——4,985 与 4985 混用会被点名。
+
+## Honest scope
+
+这是写法比较，不是算术验证：它抓**同一数量两种写法**，不能抓 4,985 这个数本身算错了。
+
+Part of [dsh-verify-kit](https://github.com/zjukop3/dsh-verify-kit): generic deliverable defects, each one verb, each runnable without DSH.
+
 MIT.

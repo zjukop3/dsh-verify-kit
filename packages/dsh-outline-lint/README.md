@@ -42,4 +42,14 @@ Exit codes: `0` clean, `1` findings, `2` usage or read error. In DSH the same fu
 
 Part of [dsh-verify-kit](https://github.com/zjukop3/dsh-verify-kit): five small deterministic checks, each one verb, each runnable without DSH.
 
+## What it decides
+
+交付文档的结构是否可审：标题在场、结论在前、有可运行的东西、标题层级不跳级。结论规则针对报告类交付物；参考手册类文档不在域内（0.1.3 起按领域判定）。
+
+## Honest scope
+
+这是结构检查，不是结论核实：它说文档**结构上可审**，从不说结论**是对的**。结论在前是对报告类的结构约定，不是对散文的审美。
+
+Part of [dsh-verify-kit](https://github.com/zjukop3/dsh-verify-kit): generic deliverable defects, each one verb, each runnable without DSH.
+
 MIT.

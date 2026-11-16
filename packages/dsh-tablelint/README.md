@@ -37,4 +37,14 @@ Exit codes: `0` clean, `1` findings, `2` usage or read error. In DSH the same fu
 
 Part of [dsh-verify-kit](https://github.com/zjukop3/dsh-verify-kit): five small deterministic checks, each one verb, each runnable without DSH.
 
+## What it decides
+
+Markdown 表格的形状是否完整：错位行、分隔行与表头列数不符、重复表头、空表。每条发现带行号。
+
+## Honest scope
+
+这是表格形状检查，不是数值核对：它证明**表格渲染不会塌**，不能证明表里的数与正文一致——那是 numberlint 的邻居。
+
+Part of [dsh-verify-kit](https://github.com/zjukop3/dsh-verify-kit): generic deliverable defects, each one verb, each runnable without DSH.
+
 MIT.
