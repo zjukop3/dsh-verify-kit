@@ -2,6 +2,8 @@
 
 Five small deterministic checks for deliverables that an agent produced and a person is about to accept. Each is one verb, each runs without DSH, each returns the same JSON whether you call the CLI or the host route.
 
+Listed in [awesome-dsh-plugin](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin) — catalog pages: [dsh-hashcheck](https://awesome-dsh-plugin.com/p/zjukop3/dsh-verify-kit--packages-dsh-hashcheck/) · [dsh-citelint](https://awesome-dsh-plugin.com/p/zjukop3/dsh-verify-kit--packages-dsh-citelint/) · [dsh-outline-lint](https://awesome-dsh-plugin.com/p/zjukop3/dsh-verify-kit--packages-dsh-outline-lint/) · [dsh-tablelint](https://awesome-dsh-plugin.com/p/zjukop3/dsh-verify-kit--packages-dsh-tablelint/) · [dsh-numberlint](https://awesome-dsh-plugin.com/p/zjukop3/dsh-verify-kit--packages-dsh-numberlint/).
+
 | package | what it decides |
 | --- | --- |
 | [dsh-hashcheck](packages/dsh-hashcheck) | which bytes moved since the manifest was written |
