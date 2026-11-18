@@ -32,6 +32,6 @@ MIT.
 
 1. 打开「插件」，启用实验性「自定义插件索引」。
 2. 「发现 → 添加索引源」，添加：`https://zjukop3.github.io/dsh-review-outbox/plugins.json`
-3. 按名字搜索安装（本仓库的五个：`hashcheck` / `citelint` / `outline-lint` / `tablelint` / `numberlint`；行业三件在 [dsh-vertical-kit](https://github.com/zjukop3/dsh-vertical-kit)：`agreement-check` / `invoice-check` / `listing-check`）。
+3. 按名字搜索安装（本仓库的五个：`hashcheck` / `citelint` / `outline-lint` / `tablelint` / `numberlint`；二十个行业场景检查在 [dsh-vertical-kit](https://github.com/zjukop3/dsh-vertical-kit)，按你手上的文件选（合同 / 发票 / 商品信息 / 会议纪要 / 简历 / 周报 / 发布说明 / 缺陷报告 / 接口文档 / 测试报告 / 提交信息 / PR 描述 / 需求文档 / 架构决策 / Dockerfile / .env 示例 / LICENSE / 事故复盘 / 运维手册 / 上手指南），对照表见 [compare](https://zjukop3.github.io/dsh-vertical-kit/compare/)）。
 
 不装 DSH 也可以：`npx <名字> --help` 直接用，或按下面的 CLI 说明。
