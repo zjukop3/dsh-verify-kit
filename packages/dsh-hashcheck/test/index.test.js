@@ -70,3 +70,18 @@ test('the ignore list matches a directory prefix, not a substring', async t => {
   const files = await listFiles(directory, { ignore: ['node_modules'] })
   assert.deepEqual(files.sort(), ['nested/data.csv', 'node_modules.md', 'report.md'])
 })
+
+test('a manifest size that disagrees with an identical file is reported', async t => {
+  // size-mismatch had only a silent direction: the hash agrees, so this is a
+  // warning about the manifest record itself, not about the file.
+  const directory = await fixture()
+  t.after(() => rm(directory, { recursive: true, force: true }))
+  const manifest = await buildManifest(directory, { ignore: ['node_modules'] })
+  manifest.files['report.md'] = { ...manifest.files['report.md'], size: manifest.files['report.md'].size + 7 }
+  const result = await verifyManifest(manifest, directory)
+  const finding = result.findings.find(f => f.rule === 'size-mismatch')
+  assert.ok(finding, JSON.stringify(result.findings.map(f => f.rule)))
+  assert.equal(finding.level, 'warn')
+  assert.equal(finding.path, 'report.md')
+  assert.equal(result.ok, true, 'a size mismatch does not fail the verify')
+})

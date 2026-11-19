@@ -30,3 +30,15 @@ test('different numbers are allowed to be spelled differently', () => {
 test('a plain four-digit number next to a decimal is not a thousands candidate', () => {
   assert.deepEqual(lintNumbers('版本 1.4985 与 0.2026。').findings, [])
 })
+
+test('the same range written two ways is reported', () => {
+  // range-dash had only a silent direction.
+  const result = lintNumbers('窗口 2026-11-02–11-08，另一处写成 3-5 天，还有一处写成 3–5 天。')
+  const finding = result.findings.find(f => f.rule === 'range-dash')
+  assert.ok(finding, JSON.stringify(result.findings.map(f => f.rule)))
+  assert.equal(finding.level, 'warn')
+})
+
+test('one consistent range stays clean', () => {
+  assert.deepEqual(lintNumbers('窗口 3–5 天，只有这一种写法。').findings, [])
+})

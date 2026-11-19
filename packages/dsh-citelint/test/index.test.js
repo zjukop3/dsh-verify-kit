@@ -50,3 +50,24 @@ test('an http url is never checked against the filesystem', async () => {
   const result = await lintCitations(report('见 [1]。', '[1]: https://example.com/x'), { baseDirectory: '/nonexistent' })
   assert.equal(result.findings.some(finding => finding.rule === 'local-missing'), false)
 })
+
+test('a fully consistent citation block produces nothing at all', async () => {
+  // citelint had no clean-document test: every rule was observed only in the
+  // direction that fires, so nothing proved a correct document is left alone.
+  const text = report(
+    '结论见 [1] 与 [2]。',
+    '[1]: https://example.com/a\n[2]: https://example.com/b',
+  )
+  const result = await lintCitations(text)
+  assert.deepEqual(result.findings, [], JSON.stringify(result.findings))
+  assert.equal(result.ok, true)
+})
+
+test('a local citation that resolves produces nothing', async t => {
+  const directory = await mkdtemp(join(tmpdir(), 'citelint-clean-'))
+  t.after(() => rm(directory, { recursive: true, force: true }))
+  await writeFile(join(directory, 'note.md'), '# note\n')
+  const text = report('见 [1]。', '[1]: ./note.md')
+  const result = await lintCitations(text, { baseDirectory: directory })
+  assert.deepEqual(result.findings, [], JSON.stringify(result.findings))
+})

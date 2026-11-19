@@ -38,3 +38,24 @@ test('a document with nothing to run fails', () => {
   assert.equal(result.ok, false)
   assert.ok(result.findings.some(finding => finding.rule === 'no-reproduction'))
 })
+
+// Three rules had only ever been observed staying silent. A rule no test makes
+// fire is a rule nobody has seen work.
+test('a document with no level-1 heading is an error', () => {
+  const result = lintOutline('## 结论\n\n做完了。\n')
+  const finding = result.findings.find(f => f.rule === 'no-title')
+  assert.ok(finding, JSON.stringify(result.findings.map(f => f.rule)))
+  assert.equal(finding.level, 'error')
+})
+
+test('two level-1 headings are an error', () => {
+  const result = lintOutline('# 报告\n\n# 另一个标题\n\n## 结论\n')
+  assert.ok(result.findings.some(f => f.rule === 'multiple-h1'), JSON.stringify(result.findings.map(f => f.rule)))
+})
+
+test('a heading with no text is an error, and names the line', () => {
+  const result = lintOutline('# 报告\n\n##\n\n正文。\n')
+  const finding = result.findings.find(f => f.rule === 'empty-heading')
+  assert.ok(finding, JSON.stringify(result.findings.map(f => f.rule)))
+  assert.match(finding.message, /line 3/)
+})

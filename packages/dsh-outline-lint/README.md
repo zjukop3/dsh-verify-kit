@@ -46,6 +46,12 @@ Part of [dsh-verify-kit](https://github.com/zjukop3/dsh-verify-kit): five small 
 
 交付文档的结构是否可审：标题在场、结论在前、有可运行的东西、标题层级不跳级。结论规则针对报告类交付物；参考手册类文档不在域内（0.1.3 起按领域判定）。
 
+## A heading with its text deleted
+
+`##` alone on a line is not a heading as far as a Markdown parser is concerned, and this check used to agree — so `empty-heading`, the rule that exists for exactly that case, could never fire. The heading regex now accepts an empty title and reports it.
+
+Found by `scripts/audit-rules.mjs`, which requires every rule to be observed in both directions. It reported `empty-heading` as silent-only, and the test written to prove it fires proved the opposite.
+
 ## Honest scope
 
 这是结构检查，不是结论核实：它说文档**结构上可审**，从不说结论**是对的**。结论在前是对报告类的结构约定，不是对散文的审美。

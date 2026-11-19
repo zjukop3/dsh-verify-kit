@@ -21,8 +21,11 @@ export function headingsOf(text) {
   text.split('\n').forEach((line, index) => {
     if (/^\s*(```|~~~)/.test(line)) fence = !fence
     if (fence) return
-    const match = /^(#{1,6})\s+(.*\S)\s*$/.exec(line)
-    if (match) headings.push({ level: match[1].length, text: match[2].trim(), line: index + 1 })
+    // `\s*` rather than `\s+` and an optional text group: a heading with its
+    // text deleted (`##` alone on a line) is exactly the case `empty-heading`
+    // exists for, and requiring text meant the rule could never see it.
+    const match = /^(#{1,6})(?:\s+(.*))?\s*$/.exec(line)
+    if (match) headings.push({ level: match[1].length, text: (match[2] ?? '').trim(), line: index + 1 })
   })
   return headings
 }
