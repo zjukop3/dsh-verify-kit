@@ -81,7 +81,16 @@ export function lintTables(text) {
     for (const duplicate of new Set(duplicates)) {
       findings.push({ level: 'warn', rule: 'duplicate-header', message: `line ${table.line}: two columns are both named "${duplicate}"` })
     }
-    if (table.header.some(cell => cell === '')) {
+    // A blank FIRST header cell is a deliberate pattern, not a defect: either the
+    // table is a two-column layout card (`| | |` with an empty header row) or the
+    // first column holds bold row labels. Two real third-party READMEs tripped
+    // this, both on purpose. A blank header anywhere else still names nothing.
+    const emptyAt = table.header.map((cell, index) => (cell === '' ? index : -1)).filter(index => index >= 0)
+    // Two shapes are deliberate: every header cell blank (`| | |` — a layout card),
+    // and only the first blank (bold row labels). Everything else names nothing.
+    const allBlank = emptyAt.length === table.header.length
+    const blankFirstOnly = emptyAt.length > 0 && emptyAt.every(index => index === 0)
+    if (emptyAt.length > 0 && !allBlank && !blankFirstOnly) {
       findings.push({ level: 'warn', rule: 'empty-header', message: `line ${table.line}: a column has no header` })
     }
     for (const row of table.rows) {

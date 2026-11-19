@@ -66,3 +66,19 @@ test('a header and delimiter with no rows is reported', () => {
 test('a normal two-column table stays clean', () => {
   assert.deepEqual(lintTables('| 名称 | 数量 |\n| --- | --- |\n| 甲 | 1 |\n').findings, [])
 })
+
+// Two real third-party READMEs use a blank first header on purpose: one is a
+// two-column layout card (`| | |`), the other puts bold row labels in column one.
+// The rule fired on both, which is a false positive on correct documents.
+test('a blank first header is a row-label or layout table, not a defect', () => {
+  const layout = lintTables('| | |\n| --- | --- |\n| **文件管理**<br/>树 | **Git**<br/>提交图 |\n')
+  assert.ok(!layout.findings.some(f => f.rule === 'empty-header'), JSON.stringify(layout.findings))
+
+  const rowLabels = lintTables('| | 用什么 | 不接会怎样 |\n| --- | --- | --- |\n| **写脚本** | 已配好的模型 | 只能出草稿 |\n')
+  assert.ok(!rowLabels.findings.some(f => f.rule === 'empty-header'), JSON.stringify(rowLabels.findings))
+})
+
+test('a blank header in any other column still warns', () => {
+  const middle = lintTables('| 名称 |  | 说明 |\n| --- | --- | --- |\n| 甲 | 乙 | 丙 |\n')
+  assert.ok(middle.findings.some(f => f.rule === 'empty-header'), JSON.stringify(middle.findings))
+})
