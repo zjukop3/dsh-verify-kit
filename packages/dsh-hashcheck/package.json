@@ -1,12 +1,13 @@
 {
   "name": "dsh-hashcheck",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "SHA-256 manifests for delivered files: build once, verify anywhere, and say exactly which bytes moved instead of 'looks fine'.",
   "type": "module",
   "main": "./src/index.js",
   "exports": {
     ".": "./src/index.js",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json"
   },
   "bin": {
     "dsh-hashcheck": "./bin/cli.js"
@@ -25,7 +26,8 @@
     "bin",
     "cordis.patch.yml",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "locale"
   ],
   "keywords": [
     "dsh",
