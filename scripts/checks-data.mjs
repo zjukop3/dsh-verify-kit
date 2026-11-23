@@ -78,6 +78,7 @@ export const CHECKS = [
       ['heading-jump', 'h1 下面直接 h4 → warn，提示层级丢失'],
       ['no-conclusion', '没有「结论/摘要」标题、开头也没有「结论：」→ error'],
       ['no-reproduction', '没有复现章节、也没有任何可运行命令 → error'],
+      ['empty-heading', '标题文字被删空（`###` 后面什么都没有）→ warn——那正是「这条标题没人负责」的样子'],
     ],
     usage: [
       'npx outline-lint report.md --json',

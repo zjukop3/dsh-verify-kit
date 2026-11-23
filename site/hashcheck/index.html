@@ -26,5 +26,5 @@ fail: 2 checked, 1 errors, 1 warnings</code></pre>
 <p>出口码：改前 0，改后 1。输出为真实 CLI 运行的逐字结果，由测试与工具保持同步。</p>
 <p>出口码：<code>0</code> 干净、<code>1</code> 有发现、<code>2</code> 用法或读文件错误。<code>--json</code> 输出机器可读结果，<code>--warnings-fail</code> 让警告也算失败。DSH 内同样的函数在 <code>POST /hashcheck/api</code>（<code>{"text":"…"}</code> 或 <code>{"path":"…"}</code>），面板与 CI 调同一实现，不可能不一致。</p>
 <div class="limit"><strong>这是清单，不是专业人士。</strong>每条发现都是文件里可判定的结构缺陷，带行号或路径；它从不说「内容好不好」。</div>
-<small>清单本身是确定性的：路径排序、正斜杠、无时间戳，同一目录在任何机器上生成同一份清单，可以直接 diff。 · <a href="https://github.com/zjukop3/dsh-verify-kit#readme">dsh-verify-kit 全部五个检查</a></small>
+<small>清单本身是确定性的：路径排序、正斜杠、无时间戳，同一目录在任何机器上生成同一份清单，可以直接 diff。 · <a href="https://github.com/zjukop3/dsh-verify-kit#readme">dsh-verify-kit 全部 5 个检查</a></small>
 </main></body></html>

@@ -39,7 +39,7 @@ ${commands}
 ${example}
 <p>出口码：<code>0</code> 干净、<code>1</code> 有发现、<code>2</code> 用法或读文件错误。<code>--json</code> 输出机器可读结果，<code>--warnings-fail</code> 让警告也算失败。DSH 内同样的函数在 <code>POST /${check.slug}/api</code>（<code>{"text":"…"}</code> 或 <code>{"path":"…"}</code>），面板与 CI 调同一实现，不可能不一致。</p>
 <div class="limit"><strong>这是清单，不是专业人士。</strong>每条发现都是文件里可判定的结构缺陷，带行号或路径；它从不说「内容好不好」。</div>
-<small>${esc(check.note)} · <a href="${REPO}#readme">dsh-verify-kit 全部五个检查</a></small>
+<small>${esc(check.note)} · <a href="${REPO}#readme">dsh-verify-kit 全部 ${CHECKS.length} 个检查</a></small>
 </main></body></html>`
 }
 
@@ -49,15 +49,15 @@ function home() {
     return `<tr><td><a href="${esc(url)}">${esc(check.title)}</a></td><td>${esc(check.npm)}</td><td>${esc(check.decides)}</td></tr>`
   }).join('')
   return `<!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>dsh-verify-kit · 五个确定性交付检查</title><meta name="description" content="Agent 产出、人工验收前的五个确定性检查：文件哈希、引用编号、文档结构、表格行列、数字写法。每个一个动词，出口码可接 CI，离线可跑。"><meta name="robots" content="index,follow"><link rel="canonical" href="${esc(`${ORIGIN}/`)}"><style>${styles}</style></head><body><main>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>dsh-verify-kit · ${CHECKS.length} 个确定性交付检查</title><meta name="description" content="Agent 产出、人工验收前的 ${CHECKS.length} 个确定性检查：文件哈希、引用编号、文档结构、表格行列、数字写法。每个一个动词，出口码可接 CI，离线可跑。"><meta name="robots" content="index,follow"><link rel="canonical" href="${esc(`${ORIGIN}/`)}"><style>${styles}</style></head><body><main>
 <p class="eyebrow">DSH VERIFY KIT</p>
-<h1>五个确定性交付检查</h1>
-<p>Agent 已经产出结果、人准备验收的那一刻，这五个检查各自决定一件事。每个都是单个命令，从文件本身判定，不调用任何模型。</p>
+<h1>${CHECKS.length} 个确定性交付检查</h1>
+<p>Agent 已经产出结果、人准备验收的那一刻，这 ${CHECKS.length} 个检查各自决定一件事。每个都是单个命令，从文件本身判定，不调用任何模型。</p>
 <table><tr><th>检查清单</th><th>npm 包</th><th>它决定什么</th></tr>${rows}</table>
-<h2>为什么是五个独立的包</h2>
-<p>一份交付通常只需要其中一两个。装五个用一个，和装一个用五个，是两种不同的依赖负担。每个包：主函数 + CLI + host 路由，出口码 <code>0/1/2</code>，<code>--json</code> 出机器结果。规则与测试一一对应，页面上的规则表来自测试套件，不会漂移。</p>
+<h2>为什么拆成 ${CHECKS.length} 个独立的包</h2>
+<p>一份交付通常只需要其中一两个。装 ${CHECKS.length} 个用一个，和装一个用 ${CHECKS.length} 个，是两种不同的依赖负担。每个包：主函数 + CLI + host 路由，出口码 <code>0/1/2</code>，<code>--json</code> 出机器结果。规则与测试一一对应，页面上的规则表来自测试套件，不会漂移。</p>
 <p>垂直行业的检查（合同、发票、电商）在 <a href="${VERTICAL}">dsh-vertical-kit</a>。</p>
-<section class="install"><h2>在 DSH 中安装</h2><p>八件作品都在同一个 format 1 索引源里，从 npm registry 解析，装完即用。在「插件」启用「自定义插件索引」，添加 <code>https://zjukop3.github.io/dsh-review-outbox/plugins.json</code>，按名字搜索安装（本仓库五个：hashcheck / citelint / outline-lint / tablelint / numberlint）。</p><p><a href="https://zjukop3.github.io/dsh-review-outbox/">索引源与全部收录说明</a></p></section>
+<section class="install"><h2>在 DSH 中安装</h2><p>八件作品都在同一个 format 1 索引源里，从 npm registry 解析，装完即用。在「插件」启用「自定义插件索引」，添加 <code>https://zjukop3.github.io/dsh-review-outbox/plugins.json</code>，按名字搜索安装（本仓库 ${CHECKS.length} 个：${CHECKS.map(check => check.cli).join(" / ")}）。</p><p><a href="https://zjukop3.github.io/dsh-review-outbox/">索引源与全部收录说明</a></p></section>
 <small><a href="${REPO}">github.com/zjukop3/dsh-verify-kit</a> · MIT · 28 tests</small>
 </main></body></html>`
 }
@@ -69,9 +69,9 @@ await mkdir(resolve(root, 'site'), { recursive: true })
 // interesting number here is not "5 checks"; it is "tablelint read 100 real
 // tables from 39 repositories nobody here wrote and reported nothing".
 const corpus = () => `<!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>这五个检查跑过什么 · dsh-verify-kit</title><meta name="description" content="五个通用检查的语料与缺陷记录：tablelint 在 39 个第三方仓库的 100 张真实表上零误报，numberlint 同样为零；outline-lint 有一条死规则已修。说清楚哪些验证过、哪些没有。"><meta name="robots" content="index,follow"><link rel="canonical" href="${esc(`${ORIGIN}/corpus/`)}"><style>${styles}</style></head><body><main>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>这 ${CHECKS.length} 个检查跑过什么 · dsh-verify-kit</title><meta name="description" content="${CHECKS.length} 个通用检查的语料与缺陷记录：tablelint 在 39 个第三方仓库的 100 张真实表上零误报，numberlint 同样为零；outline-lint 有一条死规则已修。说清楚哪些验证过、哪些没有。"><meta name="robots" content="index,follow"><link rel="canonical" href="${esc(`${ORIGIN}/corpus/`)}"><style>${styles}</style></head><body><main>
 <p class="eyebrow">DSH VERIFY KIT · EVIDENCE</p>
-<h1>这五个检查跑过什么</h1>
+<h1>这 ${CHECKS.length} 个检查跑过什么</h1>
 <nav class="nav"><a href="./">首页</a><a href="https://zjukop3.github.io/dsh-vertical-kit/defects/">22 个场景检查的缺陷台账</a><a href="https://github.com/zjukop3/dsh-verify-kit">GitHub 源码</a></nav>
 <p>规则在测试里被观察到两个方向，只说明"我想到的情况它判对了"。真正的证据是把检查指向<strong>别人写的文件</strong>，看它会不会误报、能不能抓到真错。下面是实测——每个数字都由 <code>test/third-party-corpus.test.js</code> 重新推导，页面上写的东西和代码做的事只能是一件事。</p>
 
@@ -96,8 +96,8 @@ const corpus = () => `<!doctype html>
 <h2>这个审计本身</h2>
 <p>审计不是万能的：它<strong>分不出"死规则"和"没人写触发测试"</strong>。一条没有触发测试的规则，两种情况的症状完全一样，只有人去写那条测试才会知道是哪一种。第 1 条就是写测试的人写了测试、然后发现它不会红。</p>
 
-<p>相关的两份：<a href="https://zjukop3.github.io/dsh-review-outbox/handover/">项目交接单</a>（谁接手、192 条规则怎么验证、为什么采纳指标是 0）与 <a href="https://zjukop3.github.io/dsh-vertical-kit/defects/">22 个场景检查的缺陷台账</a>。</p>
-<p><a href="./">← 回到五个检查一览</a></p>
+<p>相关的两份：<a href="https://zjukop3.github.io/dsh-review-outbox/handover/">项目交接单</a>（谁接手、这 ${CHECKS.reduce((sum, check) => sum + check.rules.length, 0)} 条规则怎么验证、为什么采纳指标是 0）与 <a href="https://zjukop3.github.io/dsh-vertical-kit/defects/">场景检查的缺陷台账</a>（那边的数字由它自己的台账算，这里不抄）。</p>
+<p><a href="./">← 回到 ${CHECKS.length} 个检查一览</a></p>
 </main></body></html>`
 await mkdir(resolve(root, 'site', 'corpus'), { recursive: true })
 await writeFile(resolve(root, 'site/corpus/index.html'), corpus())
