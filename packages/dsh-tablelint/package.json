@@ -1,6 +1,6 @@
 {
   "name": "dsh-tablelint",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Markdown table check for generated reports: rows with the wrong cell count, a delimiter row that disagrees with the header, duplicate or empty headers, and tables with no rows.",
   "type": "module",
   "main": "./src/index.js",
@@ -10,7 +10,8 @@
     "./locale/*.json": "./locale/*.json"
   },
   "bin": {
-    "tablelint": "./bin/cli.js"
+    "tablelint": "./bin/cli.js",
+    "dsh-tablelint": "./bin/cli.js"
   },
   "dsh": {
     "bundle": {

@@ -1,6 +1,6 @@
 {
   "name": "dsh-numberlint",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Number consistency check for one document: the same quantity written 4,985 and 4985, the same percentage with and without a space, and ranges with mixed dashes.",
   "type": "module",
   "main": "./src/index.js",
@@ -10,7 +10,8 @@
     "./locale/*.json": "./locale/*.json"
   },
   "bin": {
-    "numberlint": "./bin/cli.js"
+    "numberlint": "./bin/cli.js",
+    "dsh-numberlint": "./bin/cli.js"
   },
   "dsh": {
     "bundle": {
