@@ -24,9 +24,9 @@ ok: 0 errors, 2 warnings
 <!-- example:start -->
 
 ```bash
-npx numberlint report.md            # human output, exit 1 on findings
-npx numberlint report.md --json     # machine output for a pipeline
-npx numberlint report.md --warnings-fail
+npx dsh-numberlint report.md            # human output, exit 1 on findings
+npx dsh-numberlint report.md --json     # machine output for a pipeline
+npx dsh-numberlint report.md --warnings-fail
 ```
 
 同一文档内的数字写法一致性：同一个数量既写 4,985 又写 4985、同一百分比加了空格与没加空格、区间混用不同的连接号。

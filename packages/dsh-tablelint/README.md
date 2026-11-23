@@ -26,9 +26,9 @@ fail: 1 errors, 0 warnings
 <!-- example:start -->
 
 ```bash
-npx tablelint report.md            # human output, exit 1 on findings
-npx tablelint report.md --json     # machine output for a pipeline
-npx tablelint report.md --warnings-fail
+npx dsh-tablelint report.md            # human output, exit 1 on findings
+npx dsh-tablelint report.md --json     # machine output for a pipeline
+npx dsh-tablelint report.md --warnings-fail
 ```
 
 生成报告的 Markdown 表格检查：行内单元格数与表头不一致、分隔行与表头数量不符、表头重名或为空、只有表头没有数据行。

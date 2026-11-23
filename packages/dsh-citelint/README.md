@@ -30,9 +30,9 @@ fail: 1 errors, 1 warnings
 <!-- example:start -->
 
 ```bash
-npx citelint report.md            # human output, exit 1 on findings
-npx citelint report.md --json     # machine output for a pipeline
-npx citelint report.md --warnings-fail
+npx dsh-citelint report.md            # human output, exit 1 on findings
+npx dsh-citelint report.md --json     # machine output for a pipeline
+npx dsh-citelint report.md --warnings-fail
 ```
 
 交付报告的引用检查：编号断号、同一来源重复编号、列了却没被引用的来源、指向不存在本地文件的链接。

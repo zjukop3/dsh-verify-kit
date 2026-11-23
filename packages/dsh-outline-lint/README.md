@@ -29,9 +29,9 @@ fail: 2 errors, 1 warnings
 <!-- example:start -->
 
 ```bash
-npx outline-lint report.md            # human output, exit 1 on findings
-npx outline-lint report.md --json     # machine output for a pipeline
-npx outline-lint report.md --warnings-fail
+npx dsh-outline-lint report.md            # human output, exit 1 on findings
+npx dsh-outline-lint report.md --json     # machine output for a pipeline
+npx dsh-outline-lint report.md --warnings-fail
 ```
 
 交付文档结构检查：缺标题、多个一级标题、标题跳级、开头没有结论、没有任何可复现命令。
