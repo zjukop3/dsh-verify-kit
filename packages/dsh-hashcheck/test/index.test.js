@@ -85,3 +85,37 @@ test('a manifest size that disagrees with an identical file is reported', async 
   assert.equal(finding.path, 'report.md')
   assert.equal(result.ok, true, 'a size mismatch does not fail the verify')
 })
+
+// 端点契约：键名要与另外 30 个检查一致（`path`），而没有目录时必须 400。
+// 这条测试来自一次真实调用：用 `path` 调 hashcheck，它不认这个键、退回 `.`，
+// 于是把服务进程的整个仓库（37687 个文件，含 .git）哈希了回来。
+test('the endpoint takes path as an alias and refuses to guess a directory', async () => {
+  const { apply } = await import('../src/index.js')
+  const { createServer } = await import('node:http')
+  const state = {}
+  apply({ webServer: { register(spec) { state.route = spec } }, effect(fn) { fn() }, logger: { info() {} } }, {})
+  const server = createServer((req, res) => state.route.handler(req, res))
+  await new Promise(done => server.listen(0, '127.0.0.1', done))
+  const { port } = server.address()
+  const post = async body => {
+    const response = await fetch(`http://127.0.0.1:${port}/hashcheck/api`, {
+      method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body),
+    })
+    return { status: response.status, body: await response.json() }
+  }
+  try {
+    const directory = await fixture()
+    const keyed = await post({ action: 'build', directory })
+    const aliased = await post({ action: 'build', path: directory })
+    assert.equal(aliased.status, 200)
+    assert.deepEqual(aliased.body, keyed.body, 'path 与 directory 必须给出同一份清单')
+    const verified = await post({ action: 'verify', path: directory, manifest: aliased.body.manifest })
+    assert.equal(verified.status, 200)
+    assert.equal(verified.body.ok, true)
+    const guessed = await post({ action: 'build' })
+    assert.equal(guessed.status, 400, '没有目录时不许拿 cwd 顶替')
+    assert.match(guessed.body.error, /directory \(or path\) is required/)
+  } finally {
+    await new Promise(done => server.close(done))
+  }
+})
